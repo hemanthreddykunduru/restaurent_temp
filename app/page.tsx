@@ -72,9 +72,9 @@ export default function Home() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
-            {/* iOS-Style Floating Rounded Navbar */}
-            <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-2rem)] max-w-7xl">
-                <header className="rounded-[2rem] border border-white/20 bg-background/40 backdrop-blur-3xl px-6 py-4 shadow-2xl flex items-center justify-between gap-4 ring-1 ring-black/5">
+            {/* Premium Crystal White Glass Navbar */}
+            <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-1.5rem)] max-w-7xl">
+                <header className="rounded-[2.5rem] border border-white/40 bg-white/70 dark:bg-white/10 backdrop-blur-[40px] px-4 sm:px-8 py-4 sm:py-5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 ring-1 ring-black/5">
                     <div className="flex items-center gap-3">
                         <div className="flex flex-col hidden sm:flex">
                             <span className="text-lg font-black text-primary tracking-tighter leading-none">SANGAM</span>
@@ -82,13 +82,13 @@ export default function Home() {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 sm:gap-6">
+                    <div className="flex items-center gap-1 sm:gap-4 md:gap-6">
                         <BranchSelector selectedBranch={selectedBranch} onBranchChange={setSelectedBranch} />
-                        <div className="hidden lg:flex items-center gap-2">
+                        <div className="flex items-center gap-1 sm:gap-2">
                             <TableBookingDialog branch={selectedBranch} />
                             <FeedbackDialog branch={selectedBranch} />
                         </div>
-                        <div className="h-8 w-[1px] bg-border mx-1 hidden sm:block opacity-50" />
+                        <div className="h-8 w-[1px] bg-border mx-1 hidden md:block opacity-50" />
                         <ThemeToggle />
                     </div>
                 </header>
@@ -387,10 +387,10 @@ export default function Home() {
 
                     <div className="pt-16 border-t border-border flex flex-col md:flex-row justify-between items-center gap-6">
                         <div className="text-sm font-bold text-muted-foreground">
-                            &copy; 2026 Sangam Hotels & Resorts. All culinary rights reserved.
+                            &copy; 2026 Sangam Resorts. All culinary rights reserved.
                         </div>
                         <div className="flex items-center gap-8">
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/50">Modern Indian Tradition</span>
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground/50">Made with ❤️ by DevArts</span>
                         </div>
                     </div>
                 </div>

@@ -17,28 +17,40 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [open, setOpen] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setIsSubmitting(true);
+
+        // Simulate a network request
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        setIsSubmitting(false);
         setSubmitted(true);
+
+        // Auto-close after 3 seconds
         setTimeout(() => {
             setOpen(false);
-            setSubmitted(false);
-            setRating(0);
-            setComment('');
+            // Reset after animation
+            setTimeout(() => {
+                setSubmitted(false);
+                setRating(0);
+                setComment('');
+            }, 500);
         }, 3000);
     };
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all h-12 px-6 font-black uppercase tracking-widest text-[10px] group">
-                    <MessageSquare className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                    Share Feedback
+                <Button variant="outline" className="rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all h-10 sm:h-12 px-3 sm:px-6 font-black uppercase tracking-widest text-[8px] sm:text-[10px] group active:scale-95">
+                    <MessageSquare className="w-4 h-4 sm:mr-2 group-hover:scale-110 transition-transform" />
+                    <span className="hidden sm:inline">Share Feedback</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="max-w-xl bg-card border-border border-2 rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden focus:outline-none">
+            <DialogContent className="max-w-xl w-[calc(100%-1rem)] bg-card border-border border-2 rounded-[2.5rem] p-6 sm:p-10 shadow-2xl relative overflow-hidden focus:outline-none">
                 <div className="absolute top-0 left-0 w-2 h-full bg-primary" />
 
                 <AnimatePresence mode="wait">
@@ -51,10 +63,10 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
                             className="space-y-8"
                         >
                             <DialogHeader>
-                                <DialogTitle className="text-4xl font-black tracking-tighter uppercase leading-none">
+                                <DialogTitle className="text-3xl sm:text-4xl font-black tracking-tighter uppercase leading-none">
                                     Your <span className="text-primary italic">Thoughts</span>
                                 </DialogTitle>
-                                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mt-4">Branch: {branch.name.replace('Sangem Hotels - ', '')}</p>
+                                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mt-4">Branch: {branch.name.replace('Sangam Hotels - ', '')}</p>
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-8">
@@ -62,16 +74,18 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
                                     <Label className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">Overall Rating</Label>
                                     <div className="flex gap-3">
                                         {[1, 2, 3, 4, 5].map((star) => (
-                                            <button
+                                            <motion.button
                                                 key={star}
                                                 type="button"
+                                                whileHover={{ scale: 1.15, rotate: 10 }}
+                                                whileTap={{ scale: 0.9 }}
                                                 onClick={() => setRating(star)}
                                                 className="group focus:outline-none"
                                             >
                                                 <Star
-                                                    className={`w-10 h-10 transition-all duration-300 ${rating >= star ? 'fill-primary text-primary scale-110 rotate-[12deg]' : 'text-muted hover:text-primary/30'}`}
+                                                    className={`w-10 h-10 transition-all duration-300 ${rating >= star ? 'fill-primary text-primary scale-110 drop-shadow-[0_0_8px_rgba(var(--primary),0.5)]' : 'text-muted-foreground/30 hover:text-primary/30'}`}
                                                 />
-                                            </button>
+                                            </motion.button>
                                         ))}
                                     </div>
                                 </div>
@@ -88,11 +102,21 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
 
                                 <Button
                                     type="submit"
-                                    disabled={rating === 0}
-                                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-2xl h-16 text-xs font-black uppercase tracking-widest shadow-xl shadow-primary/20 transition-all active:scale-[0.98] group"
+                                    disabled={rating === 0 || isSubmitting}
+                                    className="w-full bg-primary hover:bg-primary/90 text-white rounded-3xl h-20 text-xl font-black uppercase tracking-widest shadow-2xl shadow-primary/30 transition-all active:scale-[0.98] group flex items-center justify-center border-b-4 border-primary-foreground/20"
                                 >
-                                    <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                                    Submit Feedback
+                                    {isSubmitting ? (
+                                        <motion.div
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                            className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full"
+                                        />
+                                    ) : (
+                                        <>
+                                            <Send className="w-6 h-6 mr-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                            Submit Your Feedback
+                                        </>
+                                    )}
                                 </Button>
                             </form>
                         </motion.div>

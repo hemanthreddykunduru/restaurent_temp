@@ -27,14 +27,10 @@ export default function TableBookingDialog({ branch }: TableBookingDialogProps) 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <div className="flex">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Button variant="outline" className="gap-2 bg-background hover:bg-muted border-border text-foreground rounded-xl px-5 py-3 h-auto shadow-sm">
-                            <CalendarIcon className="w-4 h-4 text-primary" />
-                            <span className="font-bold text-sm tracking-tight text-foreground">Book a Table</span>
-                        </Button>
-                    </motion.div>
-                </div>
+                <Button variant="outline" className="gap-2 bg-background hover:bg-muted border-border text-foreground rounded-xl px-3 sm:px-5 py-3 h-auto shadow-sm active:scale-95 transition-all">
+                    <CalendarIcon className="w-4 h-4 text-primary" />
+                    <span className="font-bold text-sm tracking-tight text-foreground hidden sm:inline">Book a Table</span>
+                </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl w-[calc(100%-1rem)] bg-card border-border border-2 rounded-[2rem] p-4 sm:p-8 shadow-2xl overflow-y-auto max-h-[95vh] focus:outline-none">
                 <DialogHeader className="mb-6 sm:mb-8 text-left">
@@ -79,22 +75,23 @@ export default function TableBookingDialog({ branch }: TableBookingDialogProps) 
                     </div>
 
                     <div className="space-y-6">
-                        <div className="space-y-2">
+                        <div className="space-y-4">
                             <Label className="text-xs font-black uppercase tracking-widest text-muted-foreground">Select Date</Label>
-                            <div className="p-2 sm:p-4 rounded-2xl border border-border bg-muted/30 shadow-inner flex justify-center">
+                            <div className="p-1 sm:p-2 rounded-2xl border border-border bg-muted/30 shadow-inner flex justify-center bg-card">
                                 <CalendarComponent
                                     mode="single"
                                     selected={date}
                                     onSelect={setDate}
-                                    className="scale-90 sm:scale-100 origin-center"
+                                    className="w-full"
                                     disabled={(date: Date) => date.getTime() < new Date().setHours(0, 0, 0, 0)}
                                 />
                             </div>
                         </div>
 
-                        <motion.div className="pt-2" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-2xl h-16 text-lg font-black shadow-xl hover:shadow-primary/20 transition-all group">
-                                Confirm Booking <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <motion.div className="pt-2 sm:pt-4" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-3xl h-16 sm:h-20 text-lg sm:text-2xl font-black shadow-2xl shadow-primary/30 transition-all group border-b-4 border-primary-foreground/20 flex items-center justify-center gap-2">
+                                <span className="translate-y-[1px]">Confirm Booking</span>
+                                <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-2 transition-transform shrink-0" />
                             </Button>
                         </motion.div>
                     </div>

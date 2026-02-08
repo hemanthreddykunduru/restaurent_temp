@@ -29,7 +29,7 @@ export default function CheckoutDialog({ open, onClose, total, branch }: Checkou
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
-            <DialogContent className="max-w-lg w-[calc(100%-1rem)] bg-card border-border border-2 rounded-[2rem] p-4 sm:p-8 shadow-2xl overflow-hidden focus:outline-none">
+            <DialogContent className="max-w-lg w-[calc(100%-1rem)] bg-card border-border border-2 rounded-[2.5rem] p-4 sm:p-8 shadow-2xl overflow-y-auto max-h-[92vh] focus:outline-none">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
 
                 <DialogHeader className="mb-6 relative z-10 text-left">
@@ -56,10 +56,10 @@ export default function CheckoutDialog({ open, onClose, total, branch }: Checkou
                         </Tabs>
                     </div>
 
-                    <div className="space-y-6">
+                    <div className="space-y-4 sm:space-y-6">
                         <Label className="text-xs font-black uppercase tracking-[0.3em] text-muted-foreground ml-1">Payment Method</Label>
                         <RadioGroup value={paymentMethod} onValueChange={(v) => setPaymentMethod(v as any)}>
-                            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                            <div className="grid grid-cols-2 gap-3 sm:gap-4">
                                 {[
                                     { id: 'upi', label: 'UPI', icon: Smartphone },
                                     { id: 'card', label: 'Card', icon: CreditCard },
@@ -71,12 +71,12 @@ export default function CheckoutDialog({ open, onClose, total, branch }: Checkou
                                             <RadioGroupItem value={method.id} id={method.id} className="peer sr-only" />
                                             <Label
                                                 htmlFor={method.id}
-                                                className="flex flex-col items-center justify-center rounded-3xl border-2 border-border bg-card p-6 hover:bg-muted peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 cursor-pointer transition-all h-full"
+                                                className="flex flex-col items-center justify-center rounded-3xl border-2 border-border bg-card p-4 sm:p-6 hover:bg-muted peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/5 cursor-pointer transition-all h-full"
                                             >
-                                                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-4 transition-colors ${paymentMethod === method.id ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
-                                                    <method.icon className="w-6 h-6" />
+                                                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center mb-2 sm:mb-4 transition-colors ${paymentMethod === method.id ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
+                                                    <method.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                                                 </div>
-                                                <span className={`font-black text-[10px] uppercase tracking-widest ${paymentMethod === method.id ? 'text-primary' : 'text-muted-foreground'}`}>{method.label}</span>
+                                                <span className={`font-black text-[9px] sm:text-[10px] uppercase tracking-widest ${paymentMethod === method.id ? 'text-primary' : 'text-muted-foreground'}`}>{method.label}</span>
                                             </Label>
                                         </div>
                                     </motion.div>
@@ -106,8 +106,8 @@ export default function CheckoutDialog({ open, onClose, total, branch }: Checkou
                         <Button variant="outline" onClick={onClose} className="flex-1 rounded-2xl h-16 text-xs font-black uppercase tracking-widest border-2 hover:bg-muted transition-all">
                             Review Cart
                         </Button>
-                        <Button onClick={handlePlaceOrder} className="flex-[2] bg-primary hover:bg-primary/90 text-white rounded-2xl h-16 text-lg font-black shadow-xl hover:shadow-primary/30 transition-all group">
-                            Place Order Now <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <Button onClick={handlePlaceOrder} className="flex-[2] bg-primary hover:bg-primary/90 text-white rounded-2xl h-16 text-sm sm:text-lg font-black shadow-xl hover:shadow-primary/30 transition-all group">
+                            Place Order <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Button>
                     </div>
                 </div>
