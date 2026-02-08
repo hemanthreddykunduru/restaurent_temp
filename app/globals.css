@@ -1,26 +1,86 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #e64245;
+  --color-primary-foreground: #ffffff;
+
+  --color-background: #f3f3f3;
+  --color-foreground: #222222;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #222222;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #222222;
+
+  --color-muted: #e0e0e0;
+  --color-muted-foreground: #666666;
+
+  --color-accent: #e64245;
+  --color-accent-foreground: #ffffff;
+
+  --color-border: #dcdcdc;
+  --color-input: #dcdcdc;
+  --color-ring: #e64245;
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --color-background: #222222;
+  --color-foreground: #ffffff;
+
+  --color-card: #2a2a2a;
+  --color-card-foreground: #ffffff;
+
+  --color-popover: #2a2a2a;
+  --color-popover-foreground: #ffffff;
+
+  --color-muted: #3a3a3a;
+  --color-muted-foreground: #a0a0a0;
+
+  --color-border: #444444;
+  --color-input: #444444;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Fix for invisible content during hydration if any */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* Custom Scrollbar for Dish Descriptions */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e64245cc;
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e64245;
 }
