@@ -13,7 +13,7 @@ export default function HeroSection() {
     };
 
     return (
-        <section className="relative w-full py-16 md:py-32 bg-background overflow-hidden">
+        <section className="relative w-full pt-32 pb-16 md:py-32 bg-transparent overflow-hidden">
             <div className="container mx-auto px-4">
                 <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
                     <motion.div
@@ -21,6 +21,10 @@ export default function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
                     >
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                         <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
                             Experience The Best <br />
                             <span className="text-primary italic">In Hyderabad</span>
