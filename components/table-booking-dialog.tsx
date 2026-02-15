@@ -90,9 +90,11 @@ export default function TableBookingDialog({ branch }: TableBookingDialogProps) 
                                 />
                             </div>
                         </div>
+                    </div>
 
-                        <motion.div className="pt-2 sm:pt-4" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                            <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white rounded-3xl h-16 sm:h-20 text-lg sm:text-2xl font-black shadow-2xl shadow-primary/30 transition-all group border-b-4 border-primary-foreground/20 flex items-center justify-center gap-2">
+                    <div className="col-span-1 md:col-span-2 flex justify-end pt-4">
+                        <motion.div className="w-full sm:w-auto" whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                            <Button type="submit" className="w-full sm:w-auto px-8 bg-primary hover:bg-primary/90 text-white rounded-3xl h-16 sm:h-20 text-lg sm:text-2xl font-black shadow-2xl shadow-primary/30 transition-all group border-b-4 border-primary-foreground/20 flex items-center justify-center gap-2">
                                 <span className="translate-y-[1px]">Confirm Booking</span>
                                 <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover:translate-x-2 transition-transform shrink-0" />
                             </Button>

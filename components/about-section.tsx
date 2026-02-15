@@ -18,7 +18,6 @@ export default function AboutSection() {
         <section className="py-32 bg-background relative overflow-hidden px-4">
             {/* Background elements for premium feel */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
             <div className="container mx-auto relative z-10">
                 <div className="flex flex-col lg:flex-row items-center gap-16 mb-24">

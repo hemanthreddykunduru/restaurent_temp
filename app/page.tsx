@@ -255,8 +255,7 @@ export default function Home() {
                 <TestimonialsSection />
 
                 {/* Locations Grid with Visual Cards - Stabilized Noir Section */}
-                <section className="py-32 bg-black text-white px-4 border-y border-white/5 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]" />
+                <section className="py-32 bg-background text-white px-4 border-y border-white/5 relative overflow-hidden">
 
                     <div className="container mx-auto relative z-10">
                         <div className="text-center mb-20 space-y-4">
