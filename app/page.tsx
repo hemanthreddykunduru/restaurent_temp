@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, CheckCircle2, ShoppingBag, Menu as MenuIcon, Phone, Clock } from 'lucide-react';
+import Link from 'next/link';
 import { branches, menuItems } from '@/lib/data';
 import { MenuItem, Branch } from '@/lib/types';
 import { Input } from '@/components/ui/input';
@@ -330,7 +331,7 @@ export default function Home() {
                             <p className="text-muted-foreground font-medium leading-relaxed">Defining the art of Indian fine-dining since 1995. Our commitment to authenticity and excellence remains unchanged across all Hyderabad branches.</p>
                             <div className="flex gap-4">
                                 {Object.entries(restaurantInfo.socialMedia).map(([key, value]) => (
-                                    <a key={key} href={value} className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
+                                    <a key={key} href={value} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-2xl bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-all transform hover:-translate-y-1">
                                         <span className="capitalize text-xs font-bold">{key[0]}</span>
                                     </a>
                                 ))}
@@ -356,10 +357,10 @@ export default function Home() {
                         <div className="space-y-8">
                             <h4 className="text-xl font-black uppercase tracking-widest">Quick Links</h4>
                             <ul className="space-y-4">
-                                <li><a href="#" className="text-muted-foreground hover:text-primary font-bold transition-colors">Career Opportunities</a></li>
-                                <li><a href="#" className="text-muted-foreground hover:text-primary font-bold transition-colors">Terms of Service</a></li>
-                                <li><a href="#" className="text-muted-foreground hover:text-primary font-bold transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" className="text-muted-foreground hover:text-primary font-bold transition-colors">Corporate Gifting</a></li>
+                                <li><Link href="/careers" className="text-muted-foreground hover:text-primary font-bold transition-colors">Career Opportunities</Link></li>
+                                <li><Link href="/terms" className="text-muted-foreground hover:text-primary font-bold transition-colors">Terms of Service</Link></li>
+                                <li><Link href="/privacy" className="text-muted-foreground hover:text-primary font-bold transition-colors">Privacy Policy</Link></li>
+                                <li><Link href="/corporate-gifting" className="text-muted-foreground hover:text-primary font-bold transition-colors">Corporate Gifting</Link></li>
                             </ul>
                         </div>
 

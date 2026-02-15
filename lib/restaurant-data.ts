@@ -7,7 +7,7 @@ export const restaurantInfo = {
     socialMedia: {
         instagram: 'https://instagram.com/sangemhotels',
         facebook: 'https://facebook.com/sangemhotels',
-        twitter: 'https://twitter.com/sangemhotels'
+        twitter: 'https://x.com/sangemhotels'
     },
     services: [
         {
