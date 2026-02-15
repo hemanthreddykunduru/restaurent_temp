@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar as CalendarIcon, Clock, Users, Phone, User, ArrowRight } from 'lucide-react';
 import { Branch } from '@/lib/types';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,9 +27,9 @@ export default function TableBookingDialog({ branch }: TableBookingDialogProps) 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="gap-2 bg-background hover:bg-muted border-border text-foreground rounded-xl px-3 sm:px-5 py-3 h-auto shadow-sm active:scale-95 transition-all">
-                    <CalendarIcon className="w-4 h-4 text-primary" />
-                    <span className="font-bold text-sm tracking-tight text-foreground hidden sm:inline">Book a Table</span>
+                <Button variant="outline" className="gap-1 sm:gap-2 bg-background hover:bg-muted border-border text-foreground rounded-xl px-2 sm:px-4 py-2 sm:py-3 h-auto shadow-sm active:scale-95 transition-all flex-shrink-0">
+                    <CalendarIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary flex-shrink-0" />
+                    <span className="font-bold text-xs sm:text-sm tracking-tight text-foreground hidden sm:inline">Book a Table</span>
                 </Button>
             </DialogTrigger>
             <DialogContent className="max-w-2xl w-[calc(100%-1rem)] bg-card border-border border-2 rounded-[2rem] p-4 sm:p-8 shadow-2xl overflow-y-auto max-h-[95vh] focus:outline-none">
@@ -37,6 +37,9 @@ export default function TableBookingDialog({ branch }: TableBookingDialogProps) 
                     <DialogTitle className="text-2xl sm:text-4xl font-black tracking-tighter uppercase whitespace-pre-line leading-none">
                         Reserve Your <span className="text-primary italic">Table</span>
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                        Book a table at your preferred branch by providing your details.
+                    </DialogDescription>
                     <p className="text-muted-foreground font-bold uppercase tracking-widest text-[8px] sm:text-[10px] mt-2">Branch: {branch.name.replace('Sangam Hotels - ', '')}</p>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">

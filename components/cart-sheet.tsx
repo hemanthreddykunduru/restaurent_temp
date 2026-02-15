@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, X, Minus, Plus, Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 import { MenuItem } from '@/lib/types';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -68,6 +68,10 @@ export default function CartSheet({ cartItems, onUpdateQuantity, onRemoveItem, o
                 </div>
             </SheetTrigger>
             <SheetContent showCloseButton={false} className="w-full sm:max-w-md p-0 flex flex-col h-full bg-background border-l border-border z-[2001] shadow-2xl">
+                <SheetHeader className="sr-only">
+                    <SheetTitle>Shopping Cart</SheetTitle>
+                    <SheetDescription>Review the items you have added to your cart.</SheetDescription>
+                </SheetHeader>
                 {/* Header with Close Button */}
                 <div className="p-8 border-b border-border flex items-center justify-between bg-muted/30">
                     <div className="flex items-center gap-4">

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, MessageSquare, Send, X, CheckCircle2 } from 'lucide-react';
 import { Branch } from '@/lib/types';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -45,8 +45,8 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="rounded-full border-2 border-primary/20 hover:border-primary hover:bg-primary/5 transition-all h-10 sm:h-12 px-3 sm:px-6 font-black uppercase tracking-widest text-[8px] sm:text-[10px] group active:scale-95">
-                    <MessageSquare className="w-4 h-4 sm:mr-2 group-hover:scale-110 transition-transform" />
+                <Button variant="outline" className="rounded-xl sm:rounded-full border border-primary/20 hover:border-primary hover:bg-primary/5 transition-all h-8 sm:h-10 px-2 sm:px-5 font-black uppercase tracking-widest text-[8px] sm:text-[9px] group active:scale-95 flex-shrink-0">
+                    <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 sm:mr-1.5 group-hover:scale-110 transition-transform flex-shrink-0" />
                     <span className="hidden sm:inline">Share Feedback</span>
                 </Button>
             </DialogTrigger>
@@ -66,6 +66,9 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
                                 <DialogTitle className="text-3xl sm:text-4xl font-black tracking-tighter uppercase leading-none">
                                     Your <span className="text-primary italic">Thoughts</span>
                                 </DialogTitle>
+                                <DialogDescription className="sr-only">
+                                    Share your dining experience with us by rating and commenting.
+                                </DialogDescription>
                                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground mt-4">Branch: {branch.name.replace('Sangam Hotels - ', '')}</p>
                             </DialogHeader>
 

@@ -24,7 +24,6 @@ export default function HeroSection() {
                         <br></br>
                         <br></br>
                         <br></br>
-                        <br></br>
                         <h1 className="text-4xl md:text-7xl font-black tracking-tight text-foreground">
                             Experience The Best <br />
                             <span className="text-primary italic">In Hyderabad</span>

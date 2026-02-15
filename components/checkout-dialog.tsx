@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CreditCard, Wallet, Smartphone, Banknote, ArrowRight } from 'lucide-react';
 import { Branch } from '@/lib/types';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
@@ -36,6 +36,9 @@ export default function CheckoutDialog({ open, onClose, total, branch }: Checkou
                     <DialogTitle className="text-2xl sm:text-4xl font-black tracking-tighter uppercase leading-none">
                         Confirm Your <span className="text-primary italic">Order</span>
                     </DialogTitle>
+                    <DialogDescription className="sr-only">
+                        Complete your order by selecting service mode and payment method.
+                    </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-10 relative z-10">

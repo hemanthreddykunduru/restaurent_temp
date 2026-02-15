@@ -74,21 +74,24 @@ export default function Home() {
         <div className="flex flex-col min-h-screen bg-background text-foreground transition-colors duration-300">
             {/* Premium Crystal White Glass Navbar */}
             <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-1.5rem)] max-w-7xl">
-                <header className="rounded-[2.5rem] border border-white/40 bg-white/70 dark:bg-white/10 backdrop-blur-[40px] px-4 sm:px-8 py-4 sm:py-5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-center justify-between gap-4 ring-1 ring-black/5">
-                    <div className="flex items-center gap-3">
-                        <div className="flex flex-col hidden sm:flex">
-                            <span className="text-lg font-black text-primary tracking-tighter leading-none">SANGAM</span>
-                            <span className="text-[8px] uppercase font-bold tracking-[0.3em] text-muted-foreground mt-0.5">Elite Dining</span>
+                <header className="rounded-[2.5rem] border border-white/20 bg-white/30 dark:bg-black/20 backdrop-blur-[20px] px-2 sm:px-6 py-2.5 sm:py-4 shadow-[0_8px_32px_rgba(0,0,0,0.08)] flex items-center justify-between gap-1 sm:gap-3 ring-1 ring-white/10">
+                    {/* Brand - Always show logo, text from 360px+ */}
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-shrink-0">
+                        <div className="w-7 h-7 sm:w-10 sm:h-10 md:w-12 md:h-12 bg-primary rounded-lg sm:rounded-xl md:rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 rotate-3">
+                            <span className="text-white font-black text-sm sm:text-xl md:text-2xl italic">S</span>
+                        </div>
+                        <div className="flex flex-col hidden min-[360px]:flex">
+                            <span className="text-[10px] sm:text-xs md:text-sm lg:text-base font-black text-primary tracking-tighter leading-none">SANGAM</span>
+                            <span className="text-[6px] sm:text-[7px] md:text-[8px] lg:text-[9px] font-bold text-muted-foreground uppercase tracking-wider leading-none mt-0.5 hidden sm:block">Elite Dining</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-1 sm:gap-4 md:gap-6">
+                    {/* Navigation Items */}
+                    <div className="flex items-center gap-0.5 sm:gap-1.5 md:gap-3 min-w-0 flex-1 justify-end">
                         <BranchSelector selectedBranch={selectedBranch} onBranchChange={setSelectedBranch} />
-                        <div className="flex items-center gap-1 sm:gap-2">
-                            <TableBookingDialog branch={selectedBranch} />
-                            <FeedbackDialog branch={selectedBranch} />
-                        </div>
-                        <div className="h-8 w-[1px] bg-border mx-1 hidden md:block opacity-50" />
+                        <TableBookingDialog branch={selectedBranch} />
+                        <FeedbackDialog branch={selectedBranch} />
+                        <div className="h-5 w-px bg-border hidden lg:block opacity-30" />
                         <ThemeToggle />
                     </div>
                 </header>

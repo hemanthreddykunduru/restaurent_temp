@@ -24,33 +24,33 @@ export default function BranchSelector({ selectedBranch, onBranchChange }: Branc
     return (
         <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild>
-                <div className="flex">
-                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <div className="flex min-w-0">
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="min-w-0">
                         <Button
                             variant="outline"
-                            className="flex items-center gap-2.5 bg-background hover:bg-muted border-border text-foreground rounded-2xl px-4 py-2.5 h-auto shadow-sm transition-all"
+                            className="flex items-center gap-1 sm:gap-2 bg-background hover:bg-muted border-border text-foreground rounded-xl sm:rounded-2xl px-1.5 sm:px-3 py-2 sm:py-2.5 h-auto shadow-sm transition-all max-w-[95px] sm:max-w-none min-w-0"
                         >
-                            <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center">
-                                <MapPin className="w-3.5 h-3.5 text-primary" />
+                            <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary/10 flex-shrink-0 flex items-center justify-center">
+                                <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary" />
                             </div>
-                            <div className="flex flex-col items-start leading-none">
-                                <span className="text-[9px] uppercase font-bold text-muted-foreground tracking-[0.2em] mb-0.5">Location</span>
-                                <span className="font-black text-xs">
-                                    {selectedBranch ? selectedBranch.name.replace('Sangem Hotels - ', '') : 'Select Location'}
+                            <div className="flex flex-col items-start leading-none min-w-0">
+                                <span className="text-[8px] uppercase font-bold text-muted-foreground tracking-wider mb-0.5 hidden sm:block">Location</span>
+                                <span className="font-black text-[9px] sm:text-[10px] md:text-xs truncate w-full">
+                                    {selectedBranch ? selectedBranch.name.replace('Sangem Hotels - ', '') : 'Select'}
                                 </span>
                             </div>
                             <motion.div
                                 animate={{ rotate: isOpen ? 180 : 0 }}
                                 transition={{ duration: 0.3 }}
-                                className="ml-1"
+                                className="ml-0 sm:ml-0.5 flex-shrink-0 hidden sm:block"
                             >
-                                <ChevronDown className="w-3.5 h-3.5 text-muted-foreground" />
+                                <ChevronDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-muted-foreground" />
                             </motion.div>
                         </Button>
                     </motion.div>
                 </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[340px] bg-popover/95 backdrop-blur-xl border-border rounded-3xl p-3 shadow-2xl z-[150]">
+            <DropdownMenuContent align="end" className="w-[calc(100vw-3rem)] sm:w-[340px] max-w-sm bg-popover/95 backdrop-blur-xl border-border rounded-3xl p-3 shadow-2xl z-[150]">
                 <div className="px-3 py-2 mb-2">
                     <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Our Hyderabad Outlets</h3>
                 </div>

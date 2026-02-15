@@ -3,52 +3,52 @@ import { MenuItem, Branch } from './types';
 export const branches: Branch[] = [
     {
         id: 'br1',
-        name: 'Sangam Hotels - Anna Nagar',
-        address: '123 Main Street, Anna Nagar, Hyderabad - 600040',
+        name: 'Sangam Hotels - Banjara Hills',
+        address: 'Road No. 12, Banjara Hills, Hyderabad - 500034',
         phone: '+91 98765 43210',
         image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=1200',
         features: ['Rooftop Dining', 'Valet Parking', 'Live Music', 'Private Suites', 'Award-Winning Decor'],
-        coordinates: { lat: 17.4401, lng: 78.3489 },
+        coordinates: { lat: 17.4156, lng: 78.4347 },
         openHours: '11:00 AM - 11:00 PM'
     },
     {
         id: 'br2',
-        name: 'Sangam Hotels - T Nagar',
-        address: '456 Pondy Bazaar, T Nagar, Hyderabad - 600017',
+        name: 'Sangam Hotels - Jubilee Hills',
+        address: 'Road No. 36, Jubilee Hills, Hyderabad - 500033',
         phone: '+91 98765 43211',
         image: 'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=1200',
         features: ['Luxury Banquet Hall', 'Chef Special Table', 'Kid Zone', 'Valet Parking', 'Corporate Dining'],
-        coordinates: { lat: 17.4448, lng: 78.3498 },
+        coordinates: { lat: 17.4299, lng: 78.4063 },
         openHours: '10:00 AM - 11:30 PM'
     },
     {
         id: 'br3',
-        name: 'Sangam Hotels - Velachery',
-        address: '789 Velachery Main Road, Hyderabad - 600042',
+        name: 'Sangam Hotels - Gachibowli',
+        address: 'DLF Cyber City, Gachibowli, Hyderabad - 500032',
         phone: '+91 98765 43212',
         image: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1200',
         features: ['Garden Seating', 'Pet Friendly', 'Organic Kitchen', 'Dedicated Takeaway', 'Weekend Brunch'],
-        coordinates: { lat: 17.4360, lng: 78.3410 },
+        coordinates: { lat: 17.4447, lng: 78.3483 },
         openHours: '11:00 AM - 12:00 AM'
     },
     {
         id: 'br4',
-        name: 'Sangam Hotels - OMR',
-        address: '321 Old Mahabalipuram Road, Hyderabad - 600096',
+        name: 'Sangam Hotels - Madhapur',
+        address: 'Hitech City Main Road, Madhapur, Hyderabad - 500081',
         phone: '+91 98765 43213',
         image: 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1200',
         features: ['Express Delivery', 'Work-Friendly Pods', '24/7 Buffet', 'EV Charging', 'IT Professional Hub'],
-        coordinates: { lat: 17.4265, lng: 78.3383 },
+        coordinates: { lat: 17.4483, lng: 78.3915 },
         openHours: '10:00 AM - 11:00 PM'
     },
     {
         id: 'br5',
-        name: 'Sangam Hotels - Adyar',
-        address: '654 Lattice Bridge Road, Adyar, Hyderabad - 600020',
+        name: 'Sangam Hotels - Kondapur',
+        address: 'Whitefield Road, Kondapur, Hyderabad - 500084',
         phone: '+91 98765 43214',
         image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=1200',
-        features: ['Heritage Ambiance', 'Traditional Pottery', 'Beach View', 'Cultural Shows', 'Luxury Fine Dining'],
-        coordinates: { lat: 17.4167, lng: 78.3282 },
+        features: ['Heritage Ambiance', 'Traditional Pottery', 'Garden View', 'Cultural Shows', 'Luxury Fine Dining'],
+        coordinates: { lat: 17.4623, lng: 78.3589 },
         openHours: '11:30 AM - 11:00 PM'
     }
 ];

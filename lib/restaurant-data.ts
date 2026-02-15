@@ -3,7 +3,7 @@ export const restaurantInfo = {
     tagline: 'Legacy of Authentic Indian Flavors Since 1995',
     aboutUs: 'For over three decades, Sangem Hotels has been the cornerstone of authentic Indian gastronomy in South India. Our journey began with a single vision: to bring the secret spices of royal kitchens to the modern plate. Today, we stand as a beacon of luxury dining, offering a symphony of taste across our premium Hyderabad locations.',
     email: 'contact@sangemhotels.com',
-    phone: '+91 44 2345 6789',
+    phone: '+91 40 2345 6789',
     socialMedia: {
         instagram: 'https://instagram.com/sangemhotels',
         facebook: 'https://facebook.com/sangemhotels',
@@ -43,19 +43,19 @@ export const restaurantInfo = {
         {
             name: 'Vikram Sethi',
             role: 'Food Critic',
-            content: 'The Anna Nagar branch offers an experience that rivals top global fine-dining spots. The Butter Chicken is legendary.',
+            content: 'The Banjara Hills branch offers an experience that rivals top global fine-dining spots. The Butter Chicken is legendary.',
             rating: 5
         },
         {
             name: 'Priya Raman',
             role: 'Corporate Executive',
-            content: 'Sangem OMR is my go-to for business lunches. The speed and quality are consistently impressive.',
+            content: 'Sangem Madhapur is my go-to for business lunches. The speed and quality are consistently impressive.',
             rating: 5
         },
         {
             name: 'Anirudh K.',
             role: 'Gourmet Enthusiast',
-            content: 'Authentic tastes that take you back to your roots. T Nagar branch has the best heritage vibe.',
+            content: 'Authentic tastes that take you back to your roots. Jubilee Hills branch has the best heritage vibe.',
             rating: 4.8
         }
     ]
