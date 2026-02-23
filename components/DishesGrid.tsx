@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface Dish {
     id: number;
+    dish_id: string;
     name: string;
     price: number;
     image_url: string;
@@ -67,7 +68,12 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
             if (supabaseError) {
                 setError(supabaseError.message);
             } else {
-                setDishes(data || []);
+                // Normalize data: Use dish_id as the primary id for frontend consistency
+                const normalizedData = (data || []).map((dish: any) => ({
+                    ...dish,
+                    id: dish.dish_id // Override numeric id with stable string id
+                }));
+                setDishes(normalizedData);
             }
         } catch (err: any) {
             setError(err.message || 'An unexpected error occurred');
@@ -413,7 +419,12 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
                                     className="group relative bg-background rounded-[2.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-zinc-200 dark:border-zinc-800 flex flex-col"
                                 >
                                     <div className="relative h-48 sm:h-64 w-full overflow-hidden">
-                                        <Image src={dish.image_url} alt={dish.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                                        <Image
+                                            src={dish.image_url || 'https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=800'}
+                                            alt={dish.name}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity" />
 
                                         {/* Floating Price in INR */}
