@@ -124,6 +124,13 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
         };
 
         try {
+            if (!supabase) {
+                console.error('Supabase client not initialized. Feedback not stored.');
+                setSubmitted(true);
+                setIsSubmitting(false);
+                return;
+            }
+
             const { error } = await supabase
                 .from('feedback')
                 .insert([feedbackData]);

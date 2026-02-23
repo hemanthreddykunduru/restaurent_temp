@@ -51,6 +51,13 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity }: DishesGridP
     const fetchDishes = async () => {
         setLoading(true);
         setError(null);
+
+        if (!supabase) {
+            setError('Supabase client not initialized. Check environment variables.');
+            setLoading(false);
+            return;
+        }
+
         try {
             const { data, error: supabaseError } = await supabase
                 .from('dishes')
