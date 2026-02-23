@@ -168,6 +168,7 @@ export default function Home() {
                 <AboutSection />
 
                 <DishesGrid
+                    branchId={selectedBranch.id}
                     onAdd={(dish) => handleQuantityChange(dish.id, (cartItems.find(ci => ci.id === dish.id)?.quantity || 0) + 1, dish)}
                     onRemove={(id) => handleQuantityChange(id, Math.max(0, (cartItems.find(ci => ci.id === id)?.quantity || 0) - 1))}
                     getQuantity={(id) => cartItems.find(ci => ci.id === id)?.quantity || 0}
@@ -332,6 +333,7 @@ export default function Home() {
                 onClose={() => setCheckoutOpen(false)}
                 total={total}
                 branch={selectedBranch}
+                items={cartItems}
             />
         </div>
     );

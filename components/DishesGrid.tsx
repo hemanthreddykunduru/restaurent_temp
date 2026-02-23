@@ -28,11 +28,12 @@ interface DishesGridProps {
     onAdd: (dish: any) => void;
     onRemove: (id: string) => void;
     getQuantity: (id: string) => number;
+    branchId: string;
 }
 
 type SortOption = 'default' | 'price-asc' | 'price-desc' | 'rating-desc';
 
-export default function DishesGrid({ onAdd, onRemove, getQuantity }: DishesGridProps) {
+export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: DishesGridProps) {
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -60,7 +61,7 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity }: DishesGridP
 
         try {
             const { data, error: supabaseError } = await supabase
-                .from('dishes')
+                .from(`dishes_${branchId}`)
                 .select('*');
 
             if (supabaseError) {
@@ -77,7 +78,7 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity }: DishesGridP
 
     useEffect(() => {
         fetchDishes();
-    }, []);
+    }, [branchId]);
 
     const categories = useMemo(() => {
         return {
