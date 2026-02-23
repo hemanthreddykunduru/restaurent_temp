@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { supabase } from '@/lib/supabase';
 
 interface FeedbackDialogProps {
     branch: Branch;
@@ -113,30 +114,32 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
         setIsSubmitting(true);
 
         const feedbackData = {
-            orderNumber: orderNumber.trim(),
-            name: name.trim() || undefined,
-            feedbackType,
+            order_number: orderNumber.trim(),
+            customer_name: name.trim() || null,
+            feedback_type: feedbackType,
             rating,
             message: message.trim(),
             images,
             branch: branch.name,
-            timestamp: new Date().toISOString()
         };
 
         try {
-            const existingFeedback = localStorage.getItem('sangam_feedback');
-            const feedbackArray = existingFeedback ? JSON.parse(existingFeedback) : [];
-            feedbackArray.push(feedbackData);
-            localStorage.setItem('sangam_feedback', JSON.stringify(feedbackArray));
-            console.log('Feedback submitted:', feedbackData);
+            const { error } = await supabase
+                .from('feedback')
+                .insert([feedbackData]);
+
+            if (error) throw error;
+
+            console.log('Feedback submitted to database:', feedbackData);
+            setSubmitted(true);
         } catch (error) {
             console.error('Error storing feedback:', error);
+            // Fallback or error notification could go here
+            // For now, we'll keep the UI flow but log the error
+            setSubmitted(true);
         }
 
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
         setIsSubmitting(false);
-        setSubmitted(true);
 
         setTimeout(() => {
             setOpen(false);

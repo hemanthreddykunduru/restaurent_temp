@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, MapPin, CheckCircle2, ShoppingBag, Menu as MenuIcon, Phone, Clock } from 'lucide-react';
+import { Search, MapPin, CheckCircle2, ShoppingBag, Menu as MenuIcon, Phone, Clock, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { branches, menuItems } from '@/lib/data';
 import { MenuItem, Branch } from '@/lib/types';
@@ -20,6 +20,7 @@ import TableBookingDialog from '@/components/table-booking-dialog';
 import FeedbackDialog from '@/components/feedback-dialog';
 import ThemeToggle from '@/components/theme-toggle';
 import { restaurantInfo } from '@/lib/restaurant-data';
+import DishesGrid from '@/components/DishesGrid';
 
 interface CartItem extends MenuItem {
     quantity: number;
@@ -53,12 +54,14 @@ export default function Home() {
         return ['all', ...Array.from(cats)];
     }, [branchMenu]);
 
-    const handleQuantityChange = (itemId: string, quantity: number) => {
+    const handleQuantityChange = (itemId: string, quantity: number, dynamicItem?: any) => {
         setCartItems(prev => {
             if (quantity === 0) return prev.filter(i => i.id !== itemId);
             const exists = prev.find(i => i.id === itemId);
             if (exists) return prev.map(i => i.id === itemId ? { ...i, quantity } : i);
-            const item = menuItems.find(i => i.id === itemId);
+
+            // Try to find in static menuItems first
+            const item = menuItems.find(i => i.id === itemId) || dynamicItem;
             return item ? [...prev, { ...item, quantity }] : prev;
         });
     };
@@ -92,6 +95,9 @@ export default function Home() {
                         <BranchSelector selectedBranch={selectedBranch} onBranchChange={setSelectedBranch} />
                         <TableBookingDialog branch={selectedBranch} />
                         <FeedbackDialog branch={selectedBranch} />
+                        <Button variant="outline" size="icon" className="rounded-xl sm:rounded-full border border-primary/20 hover:border-primary hover:bg-primary/5 transition-all w-8 h-8 sm:w-10 sm:h-10 active:scale-95 flex-shrink-0">
+                            <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-600 dark:text-zinc-400 transition-colors" />
+                        </Button>
                         <div className="h-5 w-px bg-border hidden lg:block opacity-30" />
                         <ThemeToggle />
                     </div>
@@ -161,96 +167,11 @@ export default function Home() {
 
                 <AboutSection />
 
-                {/* Premium Menu Grid */}
-                <section id="menu-section" className="py-24 md:py-32 px-4 bg-background relative overflow-hidden">
-                    <div className="container mx-auto relative z-10">
-                        <div className="flex flex-col items-center text-center space-y-8 mb-20">
-                            <div className="space-y-4">
-                                <Badge variant="outline" className="px-6 py-2 rounded-full border-primary text-primary font-black uppercase tracking-widest text-xs">Exclusive Menu</Badge>
-                                <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase whitespace-pre-line">
-                                    Taste The <span className="text-primary italic">Best</span>
-                                </h1>
-                            </div>
-
-                            <div className="flex flex-col md:flex-row gap-4 items-center w-full max-w-4xl p-2 bg-card border border-border rounded-[2.5rem] shadow-2xl">
-                                <div className="relative flex-1 w-full pl-6">
-                                    <Search className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-primary" />
-                                    <Input
-                                        placeholder="Search signature dishes..."
-                                        className="pl-8 h-14 border-none bg-transparent focus-visible:ring-0 text-lg font-medium placeholder:text-muted-foreground/50"
-                                        value={searchTerm}
-                                        onChange={(e) => setSearchTerm(e.target.value)}
-                                    />
-                                </div>
-                                <div className="flex flex-wrap gap-2 p-2 bg-muted/50 rounded-[2rem] w-full md:w-auto">
-                                    {['all', 'veg', 'non-veg'].map(t => (
-                                        <Button
-                                            key={t}
-                                            variant={foodTypeFilter === t ? 'default' : 'ghost'}
-                                            onClick={() => setFoodTypeFilter(t as any)}
-                                            className={`rounded-full px-6 h-10 capitalize font-bold ${foodTypeFilter === t ? 'bg-primary text-white shadow-lg' : 'text-muted-foreground'}`}
-                                        >
-                                            {t}
-                                        </Button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {categories.map(c => (
-                                    <Button
-                                        key={c}
-                                        variant={categoryFilter === c ? 'default' : 'outline'}
-                                        onClick={() => setCategoryFilter(c)}
-                                        className={`rounded-full px-8 h-12 font-black text-sm uppercase tracking-wider transition-all border-2 ${categoryFilter === c ? 'bg-foreground border-foreground text-background scale-105 shadow-xl' : 'hover:border-primary hover:text-primary active:scale-95'}`}
-                                    >
-                                        {c}
-                                    </Button>
-                                ))}
-                            </div>
-                        </div>
-
-                        <AnimatePresence mode="popLayout">
-                            {filteredMenu.length > 0 ? (
-                                <motion.div
-                                    className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-10"
-                                    layout
-                                >
-                                    {filteredMenu.map(item => (
-                                        <motion.div
-                                            key={item.id}
-                                            layout
-                                            initial={{ opacity: 0, scale: 0.9 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            exit={{ opacity: 0, scale: 0.9 }}
-                                            transition={{ duration: 0.4 }}
-                                            className="flex justify-center"
-                                        >
-                                            <MenuCard
-                                                item={item}
-                                                onAdd={() => handleQuantityChange(item.id, (cartItems.find(ci => ci.id === item.id)?.quantity || 0) + 1)}
-                                                onRemove={() => handleQuantityChange(item.id, Math.max(0, (cartItems.find(ci => ci.id === item.id)?.quantity || 0) - 1))}
-                                                quantity={cartItems.find(ci => ci.id === item.id)?.quantity || 0}
-                                            />
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            ) : (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="text-center py-40 bg-card rounded-[3rem] border-2 border-dashed border-border"
-                                >
-                                    <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mx-auto mb-6">
-                                        <Search className="w-10 h-10 text-muted-foreground/30" />
-                                    </div>
-                                    <p className="text-2xl font-bold text-muted-foreground">No dishes matching your criteria.</p>
-                                    <Button variant="link" onClick={() => { setSearchTerm(''); setCategoryFilter('all'); setFoodTypeFilter('all'); }} className="text-primary text-lg mt-4 font-black underline-offset-8">Clear all filters</Button>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                </section>
+                <DishesGrid
+                    onAdd={(dish) => handleQuantityChange(dish.id, (cartItems.find(ci => ci.id === dish.id)?.quantity || 0) + 1, dish)}
+                    onRemove={(id) => handleQuantityChange(id, Math.max(0, (cartItems.find(ci => ci.id === id)?.quantity || 0) - 1))}
+                    getQuantity={(id) => cartItems.find(ci => ci.id === id)?.quantity || 0}
+                />
 
                 <TestimonialsSection />
 
