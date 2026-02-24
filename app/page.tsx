@@ -173,9 +173,6 @@ export default function Home() {
                     onRemove={(id) => handleQuantityChange(id, Math.max(0, (cartItems.find(ci => ci.id === id)?.quantity || 0) - 1))}
                     getQuantity={(id) => cartItems.find(ci => ci.id === id)?.quantity || 0}
                 />
-
-                <TestimonialsSection />
-
                 {/* Locations Grid with Visual Cards - Stabilized Noir Section */}
                 <section className="py-32 bg-background text-white px-4 border-y border-white/5 relative overflow-hidden">
 
