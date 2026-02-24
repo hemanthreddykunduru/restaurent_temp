@@ -120,7 +120,7 @@ export default function FeedbackDialog({ branch }: FeedbackDialogProps) {
             rating,
             message: message.trim(),
             images,
-            branch: branch.name,
+            branch_id: branch.id,
         };
 
         try {

@@ -8,7 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 interface Dish {
     id: number;
-    dish_id: string;
+    dish_id: number;
+    branch_id: string;
     name: string;
     price: number;
     image_url: string;
@@ -16,11 +17,7 @@ interface Dish {
     category: string;
     cuisine: string;
     dietary_type: string;
-    prep_method: string;
-    flavor_profile: string;
     meal_type: string;
-    texture: string;
-    health_attributes: string;
     rating: number;
     prep_time: number;
 }
@@ -62,18 +59,14 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
 
         try {
             const { data, error: supabaseError } = await supabase
-                .from(`dishes_${branchId}`)
-                .select('*');
+                .from('dishes')
+                .select('*')
+                .eq('branch_id', branchId);
 
             if (supabaseError) {
                 setError(supabaseError.message);
             } else {
-                // Normalize data: Use dish_id as the primary id for frontend consistency
-                const normalizedData = (data || []).map((dish: any) => ({
-                    ...dish,
-                    id: dish.dish_id // Override numeric id with stable string id
-                }));
-                setDishes(normalizedData);
+                setDishes(data || []);
             }
         } catch (err: any) {
             setError(err.message || 'An unexpected error occurred');
@@ -407,12 +400,12 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
                 <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-10">
                     <AnimatePresence mode="popLayout">
                         {filteredAndSortedDishes.map((dish) => {
-                            const qty = getQuantity(dish.id.toString());
+                            const qty = getQuantity(dish.dish_id.toString());
 
                             return (
                                 <motion.div
                                     layout
-                                    key={dish.id}
+                                    key={dish.dish_id}
                                     initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.95 }}
@@ -470,8 +463,8 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
 
                                         <div className="mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between">
                                             <div className="flex flex-col">
-                                                <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400">Method</span>
-                                                <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{dish.prep_method}</span>
+                                                <span className="text-[9px] font-black uppercase tracking-widest text-zinc-400">Category</span>
+                                                <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{dish.category}</span>
                                             </div>
 
                                             <AnimatePresence mode="wait">
@@ -484,7 +477,7 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
                                                         className="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-800/80 backdrop-blur-sm rounded-2xl p-1.5 shadow-inner border border-zinc-200 dark:border-zinc-700"
                                                     >
                                                         <button
-                                                            onClick={(e) => { e.stopPropagation(); onRemove(dish.id.toString()); }}
+                                                            onClick={(e) => { e.stopPropagation(); onRemove(dish.dish_id.toString()); }}
                                                             className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-200 hover:bg-primary hover:text-white transition-all shadow-sm active:scale-95"
                                                         >
                                                             <Minus className="w-4 h-4" />
@@ -493,7 +486,7 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
                                                             {qty}
                                                         </span>
                                                         <button
-                                                            onClick={(e) => { e.stopPropagation(); onAdd({ id: dish.id.toString(), name: dish.name, price: dish.price, image: dish.image_url, discount: 0 }); }}
+                                                            onClick={(e) => { e.stopPropagation(); onAdd({ id: dish.dish_id.toString(), name: dish.name, price: dish.price, image: dish.image_url, discount: 0 }); }}
                                                             className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 flex items-center justify-center text-zinc-600 dark:text-zinc-200 hover:bg-primary hover:text-white transition-all shadow-sm active:scale-95"
                                                         >
                                                             <Plus className="w-4 h-4" />
@@ -505,7 +498,7 @@ export default function DishesGrid({ onAdd, onRemove, getQuantity, branchId }: D
                                                         initial={{ opacity: 0, scale: 0.8 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.8 }}
-                                                        onClick={(e) => { e.stopPropagation(); onAdd({ id: dish.id.toString(), name: dish.name, price: dish.price, image: dish.image_url, discount: 0 }); }}
+                                                        onClick={(e) => { e.stopPropagation(); onAdd({ id: dish.dish_id.toString(), name: dish.name, price: dish.price, image: dish.image_url, discount: 0 }); }}
                                                         className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center group/btn hover:bg-primary transition-all active:scale-95 border border-zinc-200 dark:border-zinc-700 shadow-sm"
                                                     >
                                                         <Plus className="w-6 h-6 text-zinc-900 dark:text-white group-hover/btn:text-white transition-colors" />

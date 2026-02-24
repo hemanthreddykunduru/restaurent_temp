@@ -328,6 +328,7 @@ export default function Home() {
             <CheckoutDialog
                 open={checkoutOpen}
                 onClose={() => setCheckoutOpen(false)}
+                onOrderSuccess={() => setCartItems([])}
                 total={total}
                 branch={selectedBranch}
                 items={cartItems}
