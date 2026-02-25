@@ -262,12 +262,24 @@ export default function CheckoutDialog({ open, onClose, onOrderSuccess, total, b
             total_amount: total,
             payment_method: 'Cash on Delivery',
             items: items.map(item => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
+            // Resilience: Add both status variants
+            order_status: 'pending',
+            current_stage: 'pending'
         };
+
+        console.log('--- PLACING_ORDER_SYNC_DEBUG ---');
+        console.log('Order Object:', orderData);
 
         try {
             if (!supabase) throw new Error('Supabase client not initialized.');
             const { error } = await supabase.from('orders').insert([orderData]);
-            if (error) throw error;
+
+            if (error) {
+                console.error('INSERT_ERROR:', error);
+                setErrors({ global: `Failed to save order: ${error.message} (Check RLS/Table)`.trim() });
+                setIsSubmitting(false);
+                return;
+            }
 
             setPlacedName(name);
             setIsSuccess(true);
@@ -279,12 +291,13 @@ export default function CheckoutDialog({ open, onClose, onOrderSuccess, total, b
                 onClose();
                 setName(''); setPhone(''); setEmail(''); setAddress(''); setLocation(null);
             }, 6500);
-        } catch (error: any) {
-            console.error('Error placing order:', error);
-            alert('Failed to place order. ' + error.message);
+        } catch (err: any) {
+            console.error('CRITICAL_INSERT_ERROR:', err);
+            setErrors({ global: 'Failed to place order. ' + err.message });
         } finally {
             setIsSubmitting(false);
         }
+
     };
 
     if (isSuccess) {

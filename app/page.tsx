@@ -21,6 +21,7 @@ import FeedbackDialog from '@/components/feedback-dialog';
 import ThemeToggle from '@/components/theme-toggle';
 import { restaurantInfo } from '@/lib/restaurant-data';
 import DishesGrid from '@/components/DishesGrid';
+import LoginDialog from '@/components/login-dialog';
 
 interface CartItem extends MenuItem {
     quantity: number;
@@ -33,6 +34,7 @@ export default function Home() {
     const [categoryFilter, setCategoryFilter] = useState('all');
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [checkoutOpen, setCheckoutOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
 
     // Filter menu based on selected branch
     const branchMenu = useMemo(() => {
@@ -95,7 +97,7 @@ export default function Home() {
                         <BranchSelector selectedBranch={selectedBranch} onBranchChange={setSelectedBranch} />
                         <TableBookingDialog branch={selectedBranch} />
                         <FeedbackDialog branch={selectedBranch} />
-                        <Button variant="outline" size="icon" className="rounded-xl sm:rounded-full border border-primary/20 hover:border-primary hover:bg-primary/5 transition-all w-8 h-8 sm:w-10 sm:h-10 active:scale-95 flex-shrink-0">
+                        <Button onClick={() => setLoginOpen(true)} variant="outline" size="icon" className="rounded-xl sm:rounded-full border border-primary/20 hover:border-primary hover:bg-primary/5 transition-all w-8 h-8 sm:w-10 sm:h-10 active:scale-95 flex-shrink-0">
                             <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-zinc-600 dark:text-zinc-400 transition-colors" />
                         </Button>
                         <div className="h-5 w-px bg-border hidden lg:block opacity-30" />
@@ -333,6 +335,8 @@ export default function Home() {
                 branch={selectedBranch}
                 items={cartItems}
             />
+
+            <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
         </div>
     );
 }
